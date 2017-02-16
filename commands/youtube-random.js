@@ -5,7 +5,6 @@ Command = new function() {
     
     self.exec = function(e, args) {
 	e.sendMessage("workin' on it");
-
     }
 
     self.getName = function() {

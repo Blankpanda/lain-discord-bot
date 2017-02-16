@@ -1,6 +1,5 @@
 var Discordie = require('discordie');
 
-
 var Discord = function() {
     
     var self = this;
@@ -11,12 +10,12 @@ var Discord = function() {
     self.isConnected = false;
 
     self.commands = [];
-    
+
     self.connect = function(commands) {
 	self.commands = commands;
 	
 	self.client.connect({
-	    token:'Mjc5ODU4Njg1NTYyMzIyOTQ0.C4BAdQ.wp2vCgL1vDhEUZUa12QD8Jix47A'
+	    token: '<token>'
 	});
 	
 	self.client.Dispatcher.on(self.Events.GATEWAY_READY, e => {
@@ -26,29 +25,28 @@ var Discord = function() {
 	console.log('Connection to discord server was successful');
 	self.isConnected = true;
 
-	self.client.Dispatcher.on(self.Events.MESSAGE_CREATE, e=> {	    
+	self.client.Dispatcher.on(self.Events.MESSAGE_CREATE, e=> {
 	    if(e.message.member['username'] != 'lain' && e.message.content.startsWith("!")) {
 		for(var i = 0; i <= commands.length; i++){
-		   
+		    
 		    if(e.message.content == commands[i].name
-			|| e.message.content.split(" ")[0] == commands[i].name)		       
+			|| e.message.content.split(" ")[0] == commands[i].name)
 		    {
 			var args = e.message.content.split(" ");
 			commands[i].exec(e.message.channel,args);
 			break;
 		    }
 		}
-		
 	    }
+	});
 	
-	});	    
     }
     self.sendChatMessage = function(e, message) {
 	e.message.channel.sendMessage(message);
     }
 }
 
-    module.exports = Discord;
+module.exports = Discord;
     
 
 

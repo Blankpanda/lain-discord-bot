@@ -1,4 +1,5 @@
 var fs = require("fs");
+
 Command = new function() {
     var self = this;
 

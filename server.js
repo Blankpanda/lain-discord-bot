@@ -7,7 +7,7 @@ var Yt = function() {
     var self = this;
 
     self.youtube = new Youtube();
-    self.key = 'AIzaSyBGBfBKfNQxoPwJ_EOBDmdNxXsQ_5d36aA';
+    self.key = '<key>';
 
     self.youtube.setKey(self.key);
 

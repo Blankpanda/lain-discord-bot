@@ -3,7 +3,6 @@ Command = new function() {
 
     self.name = "!gs";
 
-   // self.baseString = "https://www.google.com/search?site=&source=hp&q=hypothermia&oq=hypothermia";
     self.baseString = "https://www.google.com/search?q=";
     self.encoding = "&ie=utf&oe=utf-8";
     
@@ -11,8 +10,7 @@ Command = new function() {
 	var search = args[1];
 	self.replaceString(search," ","+");
 
-	e.sendMessage(self.baseString + search + self.encoding);
-	
+	e.sendMessage(self.baseString + search + self.encoding);	
     }
 
     self.replaceString = function(string, oldc,newc) {

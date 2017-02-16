@@ -10,7 +10,7 @@ var Init = function() {
     /* start Discord Server*/
     self.startLain = function startLain() {
 	// error checking
-	self.bot.connect(self.commands);    
+	self.bot.connect(self.commands);
     }
     
     self.readCommands = function() {
@@ -20,18 +20,13 @@ var Init = function() {
 	 * get an object of commands with their execute functions */
 	fs.readdir("./commands/", function(err,items) {
 	    for(var i = 0; i < items.length; i++) {
-
 		var command = require("./commands/" + items[i]);
 		self.commands.push(command);
 	    }
-
 	});
 
     }
-
-
 }
-
 
 module.exports = Init;
 
