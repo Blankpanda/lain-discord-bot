@@ -10,7 +10,7 @@ var Discord = function() {
 
     self.isConnected = false;
 
-    self.commands = {};
+    self.commands = [];
     
     self.connect = function(commands) {
 	self.commands = commands;
@@ -26,8 +26,18 @@ var Discord = function() {
 	console.log('Connection to discord server was successful');
 	self.isConnected = true;
 
+	self.client.Dispatcher.on(self.Events.MESSAGE_CREATE, e => {
+	    for(var i = 0; i <= self.commands.length; i++) {
+		console.log(commands[i])
+	    	// if(e.message.content == self.commands[i].getName()) {
+	    	//     var args = e.message.content.split(" ");
+	    	//     self.commands[i].exec(e,args);
+	    	
+	    }
+	    
+	    
+	});	    
     }
-
     self.sendChatMessage = function(e, message) {
 	e.message.channel.sendMessage(message);
     }
