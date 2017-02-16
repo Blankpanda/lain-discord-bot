@@ -27,15 +27,21 @@ var Discord = function() {
 	self.isConnected = true;
 
 	self.client.Dispatcher.on(self.Events.MESSAGE_CREATE, e => {
-	    for(var i = 0; i <= self.commands.length; i++) {
-		console.log(commands[i])
-	    	// if(e.message.content == self.commands[i].getName()) {
-	    	//     var args = e.message.content.split(" ");
-	    	//     self.commands[i].exec(e,args);
-	    	
+	   // for(var i = 0; i <= self.commands.length; i++) {
+
+	    for(var i = 0; i <= commands.length; i++){
+		if(e.message.content == commands[i].name){
+		    var args = e.message.content.split(" ");
+		    commands[i].exec(e.message.channel,args);
+		    break;
+		}
 	    }
+	    // if(e.message.content == self.commands[i].getName()) {
 	    
-	    
+	    	//     var args = e.message.content.split(" ");
+	    	//     self.commands[i].exec(e,args);	    	    
+	//	}
+	 //   }   
 	});	    
     }
     self.sendChatMessage = function(e, message) {
@@ -43,7 +49,8 @@ var Discord = function() {
     }
 }
 
-module.exports = Discord;
+    module.exports = Discord;
+    
 
 
 // client.Dispatcher.on(Events.MESSAGE_CREATE, e => {

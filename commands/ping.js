@@ -4,7 +4,8 @@ Command = new function() {
     self.name = "!ping";
 
     self.exec = function(e,args){
-	e.message.channel.sendMessage("pong");
+	e.sendMessage("pong");
+
     }
 
     self.getName = function() {

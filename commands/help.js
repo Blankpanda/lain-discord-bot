@@ -5,8 +5,8 @@ Command = new function() {
     self.name = "!help";
 
     self.exec = function(e,args) {
-	fs.readdir(".", function(err,items) {
-	    e.message.channel.sendMessage(items);
+	fs.readdir("./commands", function(err,items) {
+	    e.sendMessage(items);
 	});
     }
 

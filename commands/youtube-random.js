@@ -4,7 +4,7 @@ Command = new function() {
     self.name = "!random-video";
     
     self.exec = function(e, args) {
-	e.message.channel.sendMessage("workin' on it");
+	e.sendMessage("workin' on it");
 
     }
 

@@ -10,7 +10,7 @@ Command = new function() {
 	var search = args[1];
 	replaceString(search," ","+");
 
-	e.message.channel.sendMessage(self.baseString + search + self.encoding);
+	e.sendMessage(self.baseString + search + self.encoding);
 	
     }
 
