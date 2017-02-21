@@ -3,6 +3,8 @@ Command = new function() {
 
     self.name = "!haiku";
 
+    self.description = "output a generated haiku";
+    
     self.exec = function(e,args) {
 	// TODO: Relative path?
 	var uint8arrayToString = function(data) {

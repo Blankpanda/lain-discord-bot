@@ -3,6 +3,8 @@ Command = new function() {
 
     self.name = "!ping";
 
+    self.description = "replies with the text 'ping'";
+
     self.exec = function(e,args){
 	e.sendMessage("pong");
     }

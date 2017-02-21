@@ -5,6 +5,8 @@ Command = new function() {
 
     self.baseString = "https://www.google.com/search?q=";
     self.encoding = "&ie=utf&oe=utf-8";
+
+    self.description = "google search based on argument. argument=[text]";
     
     self.exec = function(e,args) {
 	args = args.replace(" ","+");

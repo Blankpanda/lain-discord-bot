@@ -14,10 +14,7 @@ var Init = function() {
     }
     
     self.readCommands = function() {
-	/* TODO:
-	 * build a list of commands based on commands directory, require nessecary files for commands
-	 *use some sort of interface?
-	 * get an object of commands with their execute functions */
+	/* TODO: find a better place for this */
 	fs.readdir("./commands/", function(err,items) {
 	    for(var i = 0; i < items.length; i++) {
 
