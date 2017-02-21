@@ -7,10 +7,8 @@ Command = new function() {
     self.encoding = "&ie=utf&oe=utf-8";
     
     self.exec = function(e,args) {
-	var search = args[1];
-	self.replaceString(search," ","+");
-
-	e.sendMessage(self.baseString + search + self.encoding);	
+	args = args.replace(" ","+");
+	e.sendMessage(self.baseString + args + self.encoding);	
     }
 
     self.replaceString = function(string, oldc,newc) {

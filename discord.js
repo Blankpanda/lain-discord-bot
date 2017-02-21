@@ -15,7 +15,7 @@ var Discord = function() {
 	self.commands = commands;
 	
 	self.client.connect({
-	    token: '<token>'
+	    token:'Mjc5ODU4Njg1NTYyMzIyOTQ0.C4BAdQ.wp2vCgL1vDhEUZUa12QD8Jix47A'
 	});
 	
 	self.client.Dispatcher.on(self.Events.GATEWAY_READY, e => {
@@ -25,14 +25,19 @@ var Discord = function() {
 	console.log('Connection to discord server was successful');
 	self.isConnected = true;
 
+
+	// TODO: de-obfuscate this 
 	self.client.Dispatcher.on(self.Events.MESSAGE_CREATE, e=> {
 	    if(e.message.member['username'] != 'lain' && e.message.content.startsWith("!")) {
-		for(var i = 0; i <= commands.length; i++){
-		    
+					
+		for(var i = 0; i < commands.length; i++){
 		    if(e.message.content == commands[i].name
 			|| e.message.content.split(" ")[0] == commands[i].name)
 		    {
 			var args = e.message.content.split(" ");
+			args.splice(0,1);
+			args = args.join(' ');
+			console.log(args);
 			commands[i].exec(e.message.channel,args);
 			break;
 		    }
@@ -47,34 +52,3 @@ var Discord = function() {
 }
 
 module.exports = Discord;
-    
-
-
-// client.Dispatcher.on(Events.MESSAGE_CREATE, e => {
-
-//     Youtube.getVideo(function(data) {
-// 	var test = JSON.parse(data);
-// 	if(e.message.content == "!gs hypothermia") {
-// 	    e.message.channel.sendMessage("https://www.google.com/search?q=hypothermia&ie=utf-8&oe=utf-8");
-// 	}
-// 	//	e.message.channel.sendMessage(s);
-// 	//e.message.channel.sendMessage("https://youtube.com/watch?v=" + test.items[0].id.videoId);
-// 	//console.log(test.items[0].id.videoId);
-// 	    //	    e.message.channel.sendMessage(truncString(data,20));
-// 	})
-
-// });
-
-// function sendDiscordMessage(e, message) {
-//     e.message.channel.sendMessage();
-// }
-
-// //temp
-// function truncString(string,n) {
-//     var newS = "";
-//     for(var i = 0; i <= n; i++) {
-// 	newS += string[i];
-//     }
-//     return newS;
-// }
-
