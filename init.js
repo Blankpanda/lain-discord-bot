@@ -20,8 +20,10 @@ var Init = function() {
 	 * get an object of commands with their execute functions */
 	fs.readdir("./commands/", function(err,items) {
 	    for(var i = 0; i < items.length; i++) {
+
 		var command = require("./commands/" + items[i]);
 		self.commands.push(command);
+
 	    }
 	});
 

@@ -9,7 +9,7 @@ Command = new function() {
 	    return String.fromCharCode.apply(null,data);
 	}
 	var spawn = require("child_process").spawn;
-	var process = spawn('py',['<script>']);
+	var process = spawn('py',['haiku-master/haiku/test.py']);
 	
 	process.stdout.on('data',function(data) {
 	    console.log(uint8arrayToString(data));
