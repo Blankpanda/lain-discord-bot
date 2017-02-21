@@ -9,10 +9,10 @@ Command = new function() {
 	    return String.fromCharCode.apply(null,data);
 	}
 	var spawn = require("child_process").spawn;
-	var process = spawn('py',['haiku-master/haiku/test.py']);
+	var process = spawn('py',['C:\\Users\\CalebsComp\\Documents\\haiku-master\\haiku\\main.py']);
 	
 	process.stdout.on('data',function(data) {
-	    console.log(uint8arrayToString(data));
+	    e.sendMessage(data);
 	});
 
 	process.stderr.on('data', (data) => {
