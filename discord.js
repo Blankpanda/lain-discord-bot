@@ -11,11 +11,17 @@ var Discord = function() {
 
     self.commands = [];
 
-    self.connect = function(commands) {
+    self.name = "";
+
+    self.token = "";
+
+    self.connect = function(commands, name, token) {
 	self.commands = commands;
+        self.name = name;
+        self.token = token;
 	
 	self.client.connect({
-	    token:'Mjc5ODU4Njg1NTYyMzIyOTQ0.C4BAdQ.wp2vCgL1vDhEUZUa12QD8Jix47A'
+	    token: token
 	});
 	
 	self.client.Dispatcher.on(self.Events.GATEWAY_READY, e => {
@@ -28,7 +34,7 @@ var Discord = function() {
 
 	// TODO: de-obfuscate this 
 	self.client.Dispatcher.on(self.Events.MESSAGE_CREATE, e=> {
-	    if(e.message.member['username'] != 'lain' && e.message.content.startsWith("!")) {
+	    if(e.message.member['username'] != self.name && e.message.content.startsWith("!")) {
 					
 		for(var i = 0; i < commands.length; i++){
 		    if(e.message.content == commands[i].name

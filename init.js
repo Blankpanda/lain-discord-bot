@@ -1,7 +1,7 @@
 var Discord = require('./discord.js');
 var fs = require('fs');
 
-var Init = function() {
+var Init = function(token,name) {
     var self = this;
     
     self.bot = new Discord();
