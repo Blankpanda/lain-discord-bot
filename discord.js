@@ -1,7 +1,7 @@
 var Discordie = require('discordie');
 
 var Discord = function() {
-    
+
     var self = this;
     
     self.Events = Discordie.Events;
@@ -15,11 +15,11 @@ var Discord = function() {
 
     self.token = "";
 
-    self.connect = function(commands, name, token) {
+    self.connect = function(commands, token, name) {
 	self.commands = commands;
         self.name = name;
         self.token = token;
-	
+
 	self.client.connect({
 	    token: token
 	});
@@ -43,7 +43,7 @@ var Discord = function() {
 			var args = e.message.content.split(" ");
 			args.splice(0,1);
 			args = args.join(' ');
-			console.log(args);
+//			console.log(args); LOG args
 			commands[i].exec(e.message.channel,args);
 			break;
 		    }

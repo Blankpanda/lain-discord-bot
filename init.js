@@ -10,7 +10,7 @@ var Init = function(token,name) {
     /* start Discord Server*/
     self.startLain = function startLain() {
 	// error checking
-	self.bot.connect(self.commands);
+	self.bot.connect(self.commands,token,name);
     }
     
     self.readCommands = function() {
