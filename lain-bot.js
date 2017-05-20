@@ -1,6 +1,7 @@
 var init = require('./init.js');
+var auth = require('./discord_auth.json');
 
-//var lain = new init('Mjc5ODU4Njg1NTYyMzIyOTQ0.C4BAdQ.wp2vCgL1vDhEUZUa12QD8Jix47A','lain');
-var lain = new init('Mjc5ODU4Njg1NTYyMzIyOTQ0.C_5xiw.neg-hyC6WP1AlfjvmR8x24-cWjU','lain');
+// start the bot
+lain = new init(auth.key,auth.name);
 lain.readCommands();
 lain.startLain();

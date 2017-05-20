@@ -1,4 +1,4 @@
-var Twitter = require("..\twitter.js");
+var Twitter = require("..\\twitter.js");
 Command = new function() {
     var self = this;
 
@@ -16,9 +16,9 @@ Command = new function() {
     
     self.exec = function(e,args) {
 	// TODO: fixer up! | verify twitter account ???
-	if(args[0] == "add") {
+	if(args[0] == "add" && selfnumPeople != self.MAX_WATCH) {
 	    if(self.isStarted) {
-		e.sendMessage("Failed to add. Is the watcher running?")
+		e.sendMessage("Failed to add. Is the watcher running? does the list exceed 6?")
 	    } else {
 		self.PeopleList.push(args[1]);
 		self.numPeople++;
@@ -30,10 +30,8 @@ Command = new function() {
 		e.sendMessage("Failed to remove. Is the watcher running? are there any people in the list?")
 	    } else {		
 		for(var i = 0; i < self.PeopleList.length; i++) {
-		    console.log(self.PeopleList[i] +"|"+args[1]);
 		    if(self.PeopleList[i] == args[1]) {
 			var a = self.PeopleList.splice(i,1);
-			console.log("a:" + a);
 		    }
 		}
 		self.numPeople--;

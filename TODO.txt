@@ -1,0 +1,3 @@
+- Hide key using .gitignore, use key.json or something to cover this up
+- LOG literally everything
+- command reader should only look at .js files
