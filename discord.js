@@ -40,10 +40,8 @@ var Discord = function() {
 		    if(e.message.content == commands[i].name
 			|| e.message.content.split(" ")[0] == commands[i].name)
 		    {
-			var args = e.message.content.split(" ");
-			args.splice(0,1);
-			args = args.join(' ');
-//			console.log(args); LOG args
+			var args = self.seperateArgs(e.message.content.split(" "));
+//			console.log(args); //LOG args
 			commands[i].exec(e.message.channel,args);
 			break;
 		    }
@@ -52,6 +50,12 @@ var Discord = function() {
 	});
 	
     }
+
+    self.seperateArgs = function(args) {
+	args.splice(0,1);
+	return args;
+    }
+    
     self.sendChatMessage = function(e, message) {
 	e.message.channel.sendMessage(message);
     }

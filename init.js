@@ -18,8 +18,10 @@ var Init = function(token,name) {
 	fs.readdir("./commands/", function(err,items) {
 	    for(var i = 0; i < items.length; i++) {
 
-		var command = require("./commands/" + items[i]);
-		self.commands.push(command);
+		if(items[i] != "ignore") {
+		    var command = require("./commands/" + items[i]);
+		    self.commands.push(command);		    
+		}
 
 	    }
 	});

@@ -12,9 +12,11 @@ Command = new function() {
 	fs.readdir("./commands", function(err,items) {
 	    var helpString = "";
 	    for(var i = 0; i < items.length; i++) {
-		
-		var command = require("./" + items[i]);
-		helpString += command.name + " | " + command.description + "\n";
+		if(items[i] != "./ignore") {
+		    var command = require("./" + items[i]);
+		    helpString += command.name + " | " + command.description + "\n";
+		}
+
 	    }
 	    e.sendMessage(helpString);
 	});
