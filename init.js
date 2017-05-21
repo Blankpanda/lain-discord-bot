@@ -18,9 +18,9 @@ var Init = function(token,name) {
 	fs.readdir("./commands/", function(err,items) {
 	    for(var i = 0; i < items.length; i++) {
 
-		if(items[i] != "ignore") {
+		if(items[i] != "ignore" && items[i].substr(items[i].length - 3) == ".js") {
 		    var command = require("./commands/" + items[i]);
-		    self.commands.push(command);		    
+		    self.commands.push(command);
 		}
 
 	    }

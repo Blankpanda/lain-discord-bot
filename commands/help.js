@@ -1,6 +1,5 @@
 var fs = require('fs');
 
-
 Command = new function() {
     var self = this;
 
@@ -12,7 +11,7 @@ Command = new function() {
 	fs.readdir("./commands", function(err,items) {
 	    var helpString = "";
 	    for(var i = 0; i < items.length; i++) {
-		if(items[i] != "./ignore") {
+		if(items[i] != "./ignore" && items[i].substr(items[i].length - 3) == ".js") {
 		    var command = require("./" + items[i]);
 		    helpString += command.name + " | " + command.description + "\n";
 		}
@@ -26,7 +25,6 @@ Command = new function() {
     self.getName = function() {
 	return self.name;
     }
-
 }
 
 module.exports = Command;

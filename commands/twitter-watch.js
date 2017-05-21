@@ -4,7 +4,6 @@ Command = new function() {
 
     self.name = "!twitter-watch";
     self.description = "args:add(@account_name)|remove(@account_name)|list()|start()|stop()";
-    self.action = ""; // add | remove | list | start | stop
     
     self.MAX_WATCH = 6;
     self.numPeople = 0; // use this ?
@@ -65,17 +64,11 @@ Command = new function() {
 		var min = 1;
 		self.requestInterval = min * 60 * 1000;
 
-	//	setInterval(function() {
-		    // for(var i = 0; i < self.PeopleList; i++) {
-		    // 	console.log("I'ma post: " + self.PeopleList[i]);
-		    // 	self.postTweet(e,self.PeopleList[i]);
-		// }
 		setInterval(function() {
 		    for(var i = 0; i < self.PeopleList.length; i++) {
 			self.postTweet(e,self.PeopleList[i]);
 		    }
 		},self.requestInterval);
-//		},interval); 
 	    }
 	   
 	} else if(args[0] == "stop") {

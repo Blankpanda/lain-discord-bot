@@ -41,7 +41,6 @@ var Discord = function() {
 			|| e.message.content.split(" ")[0] == commands[i].name)
 		    {
 			var args = self.seperateArgs(e.message.content.split(" "));
-//			console.log(args); //LOG args
 			commands[i].exec(e.message.channel,args);
 			break;
 		    }
