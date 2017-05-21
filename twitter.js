@@ -1,18 +1,17 @@
-var twit = require('twit');
+var Twit = require('twit');
 var auth = require("./twitter_auth.json");
-Twitter = function(usersList) {
+
+Twitter = function(name) {
 
     var T = new Twit(auth);
     var self = this;
 
-    self.numPeople = userList.length;
-    
-    self.start = function() {
-	
-    }
+    self.getTweet = function(callback) {
 
-    self.stop = function() {
-	
+	T.get('statuses/user_timeline', {screen_name:name, exclude_replies:true, count:1},function(err,data,response) {
+	   return callback(data);
+	});
     }
 }
+
 module.exports = Twitter;

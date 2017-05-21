@@ -7,16 +7,20 @@ Command = new function() {
     self.action = ""; // add | remove | list | start | stop
     
     self.MAX_WATCH = 6;
-    self.REQS_PER_PERSON = 10;
-    self.numPeople = 0;
+    self.numPeople = 0; // use this ?
     
     self.PeopleList = [];
+    self.requestInterval = 0;
 
     self.isStarted = false;
+
+    self.userPrev = [];
+    self.TWITTER_LINK_STUB = "https://twitter.com/"; // https://twitter.com/@name/status/@id
+    self.TWITTER_LINK_GET = "/status/";
     
     self.exec = function(e,args) {
 	// TODO: fixer up! | verify twitter account ???
-	if(args[0] == "add" && selfnumPeople != self.MAX_WATCH) {
+	if(args[0] == "add" && self.numPeople != self.MAX_WATCH) {
 	    if(self.isStarted) {
 		e.sendMessage("Failed to add. Is the watcher running? does the list exceed 6?")
 	    } else {
@@ -47,18 +51,53 @@ Command = new function() {
 		e.sendMessage(msg);
 	    }
 	} else if(args[0] == "start") {
-	    self.isStarted = true;
-	    // start the watcher
+	    if(self.isStarted){
+		e.sendMessage("watcher is already running");
+	    } else {
+
+		// NOTE: could remember posts and iteravely catch up on tweets
+		// NOTE: or just get the most recent tweet over a certain interval, if its the same then we step away.
+		// NOTE: could lose out on some tweets that way with opt2.
+		self.isStarted = true;
+
+		// start the watcher
+		var min = 1, self.requestInterval = min * 60 * 1000;
+
+	//	setInterval(function() {
+		    // for(var i = 0; i < self.PeopleList; i++) {
+		    // 	console.log("I'ma post: " + self.PeopleList[i]);
+		    // 	self.postTweet(e,self.PeopleList[i]);
+		// }
+		
+		for(var i = 0; i < self.PeopleList.length; i++) {
+		    self.postTweet(e,self.PeopleList[i]);
+		}
+//		},interval); 
+	    }
+	   
 	} else if(args[0] == "stop") {
 	    self.isStarted = false;
-	    // stop the watcher
 	} else {
 	    e.sendMessage("Failed to read " + self.name + " command");
 	}
     }
+ 
+    self.parseTweet = function(name,callback) {
+	console.log("parsing:" + name)
+	var t = new Twitter(name);
+	t.getTweet(function(response) {
+	    var udata = response[0];
+	    var screen_name = udata['user']['screen_name'];
+	    var id = udata['id_str'];
+	    return callback(self.TWITTER_LINK_STUB + screen_name + self.TWITTER_LINK_GET + id);
+	});
+    }
 
-    self.getTotalReqs = function() {
-	return self.numPeople * self.REQS_PER_PERSON;
+    self.postTweet = function(e, name) {
+	console.log("posting:" +name);
+	self.parseTweet(name,function(response) {
+	    e.sendMessage(response);
+	})
     }
 }
 module.exports = Command;

@@ -18,8 +18,6 @@ Command = new function() {
 	    fields: [{name: "some field", value: "some value"}],
 	    footer: {text: "footer text"}
 	});
-
-	e.uploadFile(fs.readFileSync(".//pics//test.png"), null, "tts", true);
     }
 }
 
