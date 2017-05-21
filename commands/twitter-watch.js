@@ -17,6 +17,7 @@ Command = new function() {
     self.userPrev = [];
     self.TWITTER_LINK_STUB = "https://twitter.com/"; // https://twitter.com/@name/status/@id
     self.TWITTER_LINK_GET = "/status/";
+    self.prevPosts = [];
     
     self.exec = function(e,args) {
 	// TODO: fixer up! | verify twitter account ???
@@ -61,17 +62,19 @@ Command = new function() {
 		self.isStarted = true;
 
 		// start the watcher
-		var min = 1, self.requestInterval = min * 60 * 1000;
+		var min = 1;
+		self.requestInterval = min * 60 * 1000;
 
 	//	setInterval(function() {
 		    // for(var i = 0; i < self.PeopleList; i++) {
 		    // 	console.log("I'ma post: " + self.PeopleList[i]);
 		    // 	self.postTweet(e,self.PeopleList[i]);
 		// }
-		
-		for(var i = 0; i < self.PeopleList.length; i++) {
-		    self.postTweet(e,self.PeopleList[i]);
-		}
+		setInterval(function() {
+		    for(var i = 0; i < self.PeopleList.length; i++) {
+			self.postTweet(e,self.PeopleList[i]);
+		    }
+		},self.requestInterval);
 //		},interval); 
 	    }
 	   
@@ -81,22 +84,43 @@ Command = new function() {
 	    e.sendMessage("Failed to read " + self.name + " command");
 	}
     }
- 
+
+    //TODO: REFACTOR
     self.parseTweet = function(name,callback) {
 	console.log("parsing:" + name)
 	var t = new Twitter(name);
 	t.getTweet(function(response) {
 	    var udata = response[0];
 	    var screen_name = udata['user']['screen_name'];
-	    var id = udata['id_str'];
-	    return callback(self.TWITTER_LINK_STUB + screen_name + self.TWITTER_LINK_GET + id);
+	    var id = udata['id_str'];	    
+	    
+	    if(!self.inPreviousPost(id)) {
+		self.prevPosts.push(id);
+		return callback(self.TWITTER_LINK_STUB + screen_name + self.TWITTER_LINK_GET + id);
+	    } else {
+		console.log("Got tweet, but was already posted.");
+		return null;
+	    }
+
+	    // remove the first two from previous posts ?queue?"
+	    if(self.prevPosts > self.numPeople) {
+		self.prevPosts.splice(0,self.numPeople);
+	    }
 	});
     }
 
+    self.inPreviousPost = function(id) {
+	for(var i = 0; i < self.prevPosts.length; i++) {
+	    if(id == self.prevPosts[i])		   
+		return true;
+	}
+	return false;
+    }
+
     self.postTweet = function(e, name) {
-	console.log("posting:" +name);
 	self.parseTweet(name,function(response) {
-	    e.sendMessage(response);
+	    if(response != null)
+		e.sendMessage(response);
 	})
     }
 }
