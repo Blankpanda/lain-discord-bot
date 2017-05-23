@@ -42,7 +42,7 @@ var Discord = function() {
 			|| e.message.content.split(" ")[0] == commands[i].name)
 		    {
 			var args = self.seperateArgs(e.message.content.split(" "));
-			self.Logger.writeLog(1,"invoking: " + e.message.content,{args:args});
+			self.Logger.writeLog(1,"executing command: " + e.message.content,{args:args});
 			commands[i].exec(e.message.channel,args);
 			break;
 		    }

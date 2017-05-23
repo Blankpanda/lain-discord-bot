@@ -7,8 +7,7 @@ Command = new function() {
     self.baseString = "https://www.google.com/search?q=";
     self.encoding = "&ie=utf&oe=utf-8";
 
-    self.exec = function(e,args) {
-	console.log(args);
+    self.exec = function(e,args) {	
 	args = args.join('+');
 	e.sendMessage(self.baseString + args + self.encoding,embeds=[{inline:false}]);	
     }
