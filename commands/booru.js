@@ -9,9 +9,9 @@ Command = new function() {
 
     self.exec = function(e, args) {
 
-	let message = "https://danbooru.donmai.us/posts.json?tags="
+	var message = "https://danbooru.donmai.us/posts.json?tags="
 
-	for(let val of args)
+	for(var val of args)
 	    message += (" " + val)
 
 	
