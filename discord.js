@@ -43,7 +43,7 @@ var Discord = function() {
 		    {
 			var args = self.seperateArgs(e.message.content.split(" "));
 			self.Logger.writeLog(1,"executing command: " + e.message.content,{args:args});
-			commands[i].exec(e.message.channel,args);
+			commands[i].exec(e.message.channel,args,e.message.member);
 			break;
 		    }
 		}

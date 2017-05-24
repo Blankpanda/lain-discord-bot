@@ -21,13 +21,13 @@ Command = new function() {
     self.TWITTER_LINK_GET = "/status/";
     self.prevPosts = [];
     
-    self.exec = function(e,args) {
+    self.exec = function(e,args,name) {
 	// TODO: fixer up! | verify twitter account ???
-	// TODO: fix log messages. 'e.message.member['username'] ?
+	// TODO: fix log messages. 'name.username ?
 	if(args[0] == "add" && self.numPeople != self.MAX_WATCH) {
 	    if(self.isStarted) {
-		//		self.Logger.writeLog(4,e.message.member['username'] + " tried to invoke the twitter watcher while it was running.");
-		self.Logger.write(4,"the watcher was invoked while already running.",null);
+		self.Logger.writeLog(4,name.username + " tried to invoke the twitter watcher while it was running.");
+		//self.Logger.write(4,"the watcher was invoked while already running.",null);
 		e.sendMessage("Failed to add. Is the watcher running? does the list exceed 6?")
 	    } else {
 		self.PeopleList.push(args[1]);
@@ -39,8 +39,8 @@ Command = new function() {
 	} else if(args[0] == "remove" && self.numPeople != 0) {
 	    if(self.isStarted) {
 		e.sendMessage("Failed to remove. Is the watcher running? are there any people in the list?")
-		self.Logger.write(4,"the watcher failed to remove from the list.",null);
-//		self.Logger.writeLog(4, e.message.member['username'] + " failed to remove people from watcher list.",null);
+//		self.Logger.write(4,"the watcher failed to remove from the list.",null);
+		self.Logger.writeLog(4, name.username + " failed to remove people from watcher list.",null);
 	    } else {		
 		for(var i = 0; i < self.PeopleList.length; i++) {
 		    if(self.PeopleList[i] == args[1]) {
@@ -63,8 +63,8 @@ Command = new function() {
 	    }
 	} else if(args[0] == "start") {
 	    if(self.isStarted){
-		//		self.Logger.writeLog(4,e.message.member['username'] + " tried to start the watcher when it was already running.",null);
-		self.Logger.writeLog(4,"the watcher was attempted to start when it was already started.",null);
+		self.Logger.writeLog(4,name.username + " tried to start the watcher when it was already running.",null);
+		//self.Logger.writeLog(4,"the watcher was attempted to start when it was already started.",null);
 		e.sendMessage("watcher is already running");
 	    } else {
 
@@ -87,12 +87,12 @@ Command = new function() {
 	    }
 	   
 	} else if(args[0] == "stop") {
-	    //	    self.Logger.writeLog(2,e.message.member['username'] + " stopped the watcher.", null);
-	    self.Logger.writeLog(2,"watcher was stopped.",null);
+	    self.Logger.writeLog(2,name.username + " stopped the watcher.", null);
+	    //self.Logger.writeLog(2,"watcher was stopped.",null);
 	    self.isStarted = false;
 	} else {
-	    //	    self.Logger.writeLog(4,e.message.member['username'] + " wrote a bad command for twitter-watcher.", null);
-	    self.Logger.writeLog(4,"bad command issued for twitter-watch",null);
+	    self.Logger.writeLog(4,name.username + " wrote a bad command for twitter-watcher.", null);
+	    //self.Logger.writeLog(4,"bad command issued for twitter-watch",null);
 	    e.sendMessage("Failed to read " + self.name + " command");
 	}
     }
