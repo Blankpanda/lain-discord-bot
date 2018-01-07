@@ -22,7 +22,7 @@ Command = new function() {
     self.prevPosts = [];
     
     self.exec = function(e,args,name) {
-	// TODO: fixer up! | verify twitter account ???
+	// TODO: fixer up! | veify twitter account ???
 	// TODO: fix log messages. 'name.username ?
 	if(args[0] == "add" && self.numPeople != self.MAX_WATCH) {
 	    if(self.isStarted) {

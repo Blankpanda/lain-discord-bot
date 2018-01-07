@@ -9,6 +9,10 @@ Command = new function() {
 
     self.exec = function(e, args,name) {
 
+	if ("netorare" in args) {
+	    e.sendMesasge("haha");
+	    return;
+	}
 	var message = "https://danbooru.donmai.us/posts.json?tags="
 
 	for(var val of args)

@@ -9,15 +9,17 @@ var Discord = function() {
     self.isConnected = false;
 
     self.commands = [];
-
+    self.actions  = [];
+    
     self.name = "";
 
     self.token = "";
     
     self.Logger = new Log(__filename);
     
-    self.connect = function(commands, token, name) {
+    self.connect = function(commands,actions, token, name) {
 	self.commands = commands;
+	self.actions = actions;
         self.name = name;
         self.token = token;
 
@@ -32,8 +34,8 @@ var Discord = function() {
 	self.Logger.writeLog(1,"Connection to Discord server was successful.",null);
 	self.isConnected = true;
 
-
-	// TODO: de-obfuscate this 
+	// command handling
+	// TODO: de-obfuscate this, something much better takes this place eventually | event driven | commands could be actions
 	self.client.Dispatcher.on(self.Events.MESSAGE_CREATE, e=> {
 	    if(e.message.member['username'] != self.name && e.message.content.startsWith("!")) {
 		self.Logger.writeLog(1,e.message.member['username'] + " invoked: " + e.message.content,null);
@@ -47,10 +49,25 @@ var Discord = function() {
 			break;
 		    }
 		}
+	    } else {
+		self.Logger.writeLog(1,"starting actions...",null);
+		// log
+		for(var i = 0; i < self.actions.length; i++) { // TODO: filtering
+		    actions[i].start(e,e.message.member);
+		}
 	    }
 	});
 	
     }
+
+    // Initally located in init.js, but we need to pass discordies event handler to actions
+    // self.startActions = function(e) { // call after read
+    // 	self.Logger.writeLog(1,"starting actions...",null);
+    // 	// log
+    // 	for(var i = 0; i < self.actions.length; i++) { // TODO: filtering
+    // 	    self.actions[i].start(e.message.channel);
+    // 	}
+    // }
 
     self.seperateArgs = function(args) {
 	args.splice(0,1);
